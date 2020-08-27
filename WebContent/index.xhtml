@@ -5,34 +5,26 @@
 
 
 <h:head>
-	<title>Olá JSF</title>
-	
-	<script>
-		function alterarValoDoCampo() {
-		  var campo =	document.getElementById('formPessoa:nome');
-		  campo.value = 'em cliquei no campo :)';
-		}
-	
-	</script>
-	
+	<title>Acesso Sistema</title>	
 </h:head>
 
 <h:body>
 
-	<h:form id="formPessoa">
-	
-	<h1>Olá JSF Página index.jsf</h1>
-	
-	<h:inputText id="nome"  onclick="this.value='troquei o valor'" 	onchange="this.value=this.value.toUpperCase();"  />
-	<h:commandButton value="clicar" onclick="alterarValoDoCampo();"/>
-	
-	
-	<br/>
-	<br/>
-	<h:commandButton value="Navegar" action="primeirapagina"/> <!-- Navegar para a 1º pagina -->
-	
-	<h:commandButton value="Explicita" action="explicita"/>
+	<h:form id="formLogin" style="margin-top:22%; margin-left:40%;">
+
+		<h1>Realize o login </h1>
 		
+		<h:panelGrid columns="2" rendered="true">
+		
+		<h:outputLabel value="Login:"/>
+		<h:inputText value="#{pessoaBean.pessoa.login}"/>
+		
+		<h:outputLabel value="Senha:"/>
+		<h:inputSecret value="#{pessoaBean.pessoa.senha}"/>
+		
+		<h:commandButton value="Acessar" action="#{pessoaBean.logar}"/>
+		
+		</h:panelGrid>	
 	</h:form>
 
 </h:body>
