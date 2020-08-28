@@ -19,7 +19,7 @@
 		<property name="hibernate.hbm2ddl.auto" value="update"/>
 	
 	
-	    <!-- c3p0 -->
+ <!-- c3p0 -->
 		<!-- mínimo de conexões ou portas disponíveis -->
 		<property name="hibernate.c3p0.min_size" value="5"/>
 			
@@ -34,9 +34,10 @@
 			
 		<!-- tempo ocioso em segundos antes de uma conexão ser validada automaticamente -->
 		<property name="hibernate.c3p0.idle_test_period" value="120"/>
-		
+	  	
 	
 	</properties>
+	
 		
 	
 	</persistence-unit>

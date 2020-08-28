@@ -31,17 +31,21 @@
 		
 		<h:outputLabel value="Nome:" />
 		<h:inputText value="#{pessoaBean.pessoa.nome}" required="true" requiredMessage="informe nome do usuário."
-			validatorMessage="Nome tem que ter no minimo 10 letras" pt:placeholder="Informe o nome do usuário">
+			validatorMessage="Nome tem que ter no minimo 10 letras" pt:placeholder="Informe o nome do usuário"
+			valueChangeListener="#{pessoaBean.mudancaDeValor}">
 			<f:validateLength minimum="10" maximum="50"/>
 		</h:inputText>
 	
 		<h:outputLabel value="Sobrenome:" />
-		<h:inputText value="#{pessoaBean.pessoa.sobrenome}" />
+		<h:inputText value="#{pessoaBean.pessoa.sobrenome}" valueChangeListener="#{pessoaBean.mudancaDeValorSobrenome}"/>
 		
 		<h:outputLabel value="Idade:" />
 		<h:inputText value="#{pessoaBean.pessoa.idade}" />
 		
-			
+	
+		<h:outputLabel value="Cpf"/>
+	    <h:inputText value="#{pessoaBean.pessoa.cpf}"  pt:placeholder="000.000.000-00"/>
+	    		
 		<h:outputLabel value="Sexo:"/>
 		<h:selectOneMenu id="CampoSexo" value="#{pessoaBean.pessoa.sexo}" required="false">
 			<f:selectItem itemValue="[--Selecione--]" noSelectionOption="true"/>
@@ -139,25 +143,8 @@
 			<f:selectItem itemValue="5" itemLabel="Cobol" />
 		</h:selectManyCheckbox>
 		
-		
-		   
-	    <h:outputLabel value="Estados:"/>
-	    <h:selectOneMenu value="#{pessoaBean.pessoa.estados}" immediate="true" id="comboEstados"
-	         converter="estadoConverter">
-	         <f:selectItem itemLabel="--[Selecione]--" noSelectionOption="true"/>
-	         <f:selectItems value="#{pessoaBean.estados}"/>
-	         <f:ajax event="change" execute="@this" render="comboCidade"
-	         listener="#{pessoaBean.carregaCidades}"/>
-	    </h:selectOneMenu>
-	        
-	     <h:outputLabel value="Cidades:"/>
-	    
-	    <h:selectOneMenu value="#{pessoaBean.pessoa.cidades}" immediate="true" id="comboCidade"
-	      converter="cidadeConverter">
-	      <f:selectItem  noSelectionOption="true" itemLabel="--[Selecione]--"/>
-	      <f:selectItems value="#{pessoaBean.cidades}"/>
-	    </h:selectOneMenu>    
-	        
+	  
+	       
 	        
         <h:outputLabel/>
         <h:panelGroup>
@@ -165,7 +152,8 @@
             	<f:ajax execute="botaoNovo" render="@form"/>
             </h:commandButton>
 				
-			<h:commandButton style="margin-left:1cm;"  value="Salvar" action="#{pessoaBean.salvar}" image="/resources/img/salvar.png" title="salvar" />
+			<h:commandButton style="margin-left:1cm;"  value="Salvar"  actionListener="#{pessoaBean.registraLog}" 
+			action="#{pessoaBean.salvar}" image="/resources/img/salvar.png" title="salvar" />
 	        
 	        <h:commandButton style="margin-left:1cm;"  value="Remove" action="#{pessoaBean.remove}" image="/resources/img/remove.png" 
 	        title="remove" rendered="#{pessoaBean.permiteAcesso('ADMINISTRADOR')}"/>
@@ -203,6 +191,11 @@
 			<h:column>
 				<f:facet name="header">Idade</f:facet>
 				<h:outputText value="#{pessoa.idade}" />
+			</h:column>
+			
+			<h:column>
+				<f:facet name="header">CPF</f:facet>
+				<h:outputText value="#{pessoa.cpf}" />
 			</h:column>
 					
 		     	

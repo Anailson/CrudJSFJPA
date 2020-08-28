@@ -72,7 +72,12 @@ public String salvar() {
 		mostrarMsg("Cadastrado com sucesso!");
 		return "";
 	}
-	
+
+    /* CHAMANDO NA ACÃO DE SALVAR NA PAGINA XHTML É CHAMADO ANTES DO SALVAR*/
+		public void registraLog() {
+			System.out.println("método registraLog");
+			/* Criar a rotina de gravação de log */
+		}	
 	
 	
 	//A MSG É MOSTRAR APOS AS AÇÕES NA APLICAÇÃO
@@ -378,6 +383,17 @@ public String salvar() {
 								response.getOutputStream().flush();
 			FacesContext.getCurrentInstance().responseComplete();
 			
+		}
+		
+		/*valueChangeListener_aos_eventos AO EDITAR CHAMAR O VALOR QUE CONSTA E DEPOIS O NOVO NOME*/
+		public void mudancaDeValor(ValueChangeEvent evento) {
+			System.out.println("Valor antigo: " + evento.getOldValue());//ANAILSON
+			System.out.println("Valor Novo: " + evento.getNewValue()); //ANAILSON JAVA
+		}
+
+		public void mudancaDeValorSobrenome(ValueChangeEvent evento) {
+			System.out.println("Valor antigo: " + evento.getOldValue());//SOBRENOME
+			System.out.println("Valor Novo: " + evento.getNewValue());//NOVO SOBRENOME
 		}
 		
 }

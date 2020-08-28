@@ -17,6 +17,14 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.persistence.Transient;
+import javax.validation.constraints.DecimalMax;
+import javax.validation.constraints.DecimalMin;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
+import org.hibernate.validator.constraints.NotEmpty;
+import org.hibernate.validator.constraints.br.CNPJ;
+import org.hibernate.validator.constraints.br.CPF;
 
 
 
@@ -31,7 +39,14 @@ public class Pessoa implements Serializable {
 
 	private String nome;
 	
+	/*ASSIM OBRIGANDO O USUARIO INFORMA O SOBRENOME*/
+	@NotEmpty(message = "Sobrenome deve ser informado")
+	@NotNull(message ="Sobrenome deve ser informado" )
 	private String sobrenome;
+	
+	/*USANDO O BEAN VALIDATOR*/
+	@CPF(message="Cpf Inválido")//VALIDANDO O CPF
+	private String cpf;
 	
 	private String login;
 	
@@ -40,6 +55,9 @@ public class Pessoa implements Serializable {
 	//CRIANDO VARIAVEL PARA O PERFIL DO USUARIO
 	private String perfilUser;
 
+	
+	@DecimalMax(value="50", message = "Idade de ser menor que 50")
+	@DecimalMin(value="10",message = "Idade deve ser maior que 10")
 	private Integer idade;
 
 	
@@ -105,6 +123,16 @@ public class Pessoa implements Serializable {
 	@Basic(fetch =  FetchType.LAZY)
 	private byte[] fotoIconeBase64Original;
 	
+	
+	
+
+	public String getCpf() {
+		return cpf;
+	}
+
+	public void setCpf(String cpf) {
+		this.cpf = cpf;
+	}
 
 	public String getFotoIconBase64() {
 		return fotoIconBase64;
